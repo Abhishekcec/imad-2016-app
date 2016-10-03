@@ -21,7 +21,7 @@
      request.onreadystatechange =  function() {
          if(request.readyState === XMLHttpRequest.DONE) {
              if(request.status === 200) {
-                 var names = eequest.ResponseText;
+                 var names = request.ResponseText;
                  names = JSON.parse(names);
                  var list = '';
                  for(var i=0; i<names.length; i++) {
