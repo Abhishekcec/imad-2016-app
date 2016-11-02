@@ -2,8 +2,79 @@ var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
 
+/*var pool = require('pg').pool;
+
+var config = {
+    user: 'abhishekcec',
+    database: 'abhishekcec',
+    host: 'imad.hasura-app.io'.
+    port: '5432',
+    password: process.env.DB_PASSWORD
+}*/
+
+ 
 var app = express();
 app.use(morgan('combined'));
+
+var articleOne = {
+    title: 'Article-one | abhishek cec',
+    heading: 'article one',
+    date: 'sep 7, 2016',
+    content: `
+        <p>
+            This is the content for my first webapp. This is the content for my first webapp. This is the content for my first webapp.
+            This is the content for my first webapp. This is the content for my first webapp. This is the content for my first webapp.
+            This is the content for my first webapp.
+        </p>
+        <p>
+            This is the content for my first webapp. This is the content for my first webapp. This is the content for my first webapp.
+            This is the content for my first webapp. This is the content for my first webapp. This is the content for my first webapp.
+            This is the content for my first webapp.
+        </p>
+        <p>
+            This is the content for my first webapp. This is the content for my first webapp. This is the content for my first webapp.
+            This is the content for my first webapp. This is the content for my first webapp. This is the content for my first webapp.
+            This is the content for my first webapp.
+        </p>  `
+    
+};
+
+function createTemplate (data) {
+    var title = data.title;
+    var date = data.date;
+    var heading = data.heading;
+    var content = data.content;
+    var htmlTemplate = `
+    <html>
+        <head>
+            <title>
+                ${title}
+            </title>
+            <meta name="viewport" content="width-deuice-width, initial-scale=1" />
+           <link href="/ui/style.css" rel="stylesheet" />
+        </head>
+        <body>
+            <div class="container" >
+               <div>
+                   <a href='/'>home</a>
+               </div>
+               <hr/>
+               <h3>
+                   ${heading}
+               </h3>
+               <div>
+                   ${date}
+               </div>
+                  <div>
+                     ${content}        
+                  </div>
+            </div>
+        </body>
+            
+    </html>
+    `;
+    return htmlTemplate;
+}
 
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
@@ -24,7 +95,7 @@ app.get('/submit-name', function(req, res) {
 
 
 app.get('/article-one',function (req, res){
-   res.sendFile(path.join(__dirname, 'ui', 'article-one.html'));    
+   res.send(createTemplate(articleOne));   
 });
 
 app.get('/article-two',function (req, res){
