@@ -16,29 +16,72 @@ var config = {
 var app = express();
 app.use(morgan('combined'));
 
-var articleOne = {
-    title: 'Article-one | abhishek cec',
-    heading: 'article one',
-    date: 'sep 7, 2016',
-    content: `
-        <p>
-            This is the content for my first webapp. This is the content for my first webapp. This is the content for my first webapp.
-            This is the content for my first webapp. This is the content for my first webapp. This is the content for my first webapp.
-            This is the content for my first webapp.
-        </p>
-        <p>
-            This is the content for my first webapp. This is the content for my first webapp. This is the content for my first webapp.
-            This is the content for my first webapp. This is the content for my first webapp. This is the content for my first webapp.
-            This is the content for my first webapp.
-        </p>
-        <p>
-            This is the content for my first webapp. This is the content for my first webapp. This is the content for my first webapp.
-            This is the content for my first webapp. This is the content for my first webapp. This is the content for my first webapp.
-            This is the content for my first webapp.
-        </p>  `
-    
+var articles = {
+    'article-one': {
+        title: 'Article-one | abhishek cec',
+        heading: 'article one',
+        date: 'sep 7, 2016',
+        content: `
+            <p>
+                This is the content for my first webapp. This is the content for my first webapp. This is the content for my first webapp.
+                This is the content for my first webapp. This is the content for my first webapp. This is the content for my first webapp.
+                This is the content for my first webapp.
+            </p>
+            <p>
+                This is the content for my first webapp. This is the content for my first webapp. This is the content for my first webapp.
+                This is the content for my first webapp. This is the content for my first webapp. This is the content for my first webapp.
+                This is the content for my first webapp.
+            </p>
+            <p>
+                This is the content for my first webapp. This is the content for my first webapp. This is the content for my first webapp.
+                This is the content for my first webapp. This is the content for my first webapp. This is the content for my first webapp.
+                This is the content for my first webapp.
+            </p>  `
+        
+    },
+    'article-two': {
+        title: 'Article-two | abhishek cec',
+        heading: 'article two',
+        date: 'sep 10, 2016',
+        content: `
+            <p>
+                This is the content for my first webapp. This is the content for my first webapp. This is the content for my first webapp.
+                This is the content for my first webapp. This is the content for my first webapp. This is the content for my first webapp.
+                This is the content for my first webapp.
+            </p>
+            <p>
+                This is the content for my first webapp. This is the content for my first webapp. This is the content for my first webapp.
+                This is the content for my first webapp. This is the content for my first webapp. This is the content for my first webapp.
+                This is the content for my first webapp.
+            </p>
+            <p>
+                This is the content for my first webapp. This is the content for my first webapp. This is the content for my first webapp.
+                This is the content for my first webapp. This is the content for my first webapp. This is the content for my first webapp.
+                This is the content for my first webapp.
+            </p>  `
+    },
+    'article-three': {
+        title: 'Article-three | abhishek cec',
+        heading: 'article three',
+        date: 'sep 17, 2016',
+        content: `
+            <p>
+                This is the content for my first webapp. This is the content for my first webapp. This is the content for my first webapp.
+                This is the content for my first webapp. This is the content for my first webapp. This is the content for my first webapp.
+                This is the content for my first webapp.
+            </p>
+            <p>
+                This is the content for my first webapp. This is the content for my first webapp. This is the content for my first webapp.
+                This is the content for my first webapp. This is the content for my first webapp. This is the content for my first webapp.
+                This is the content for my first webapp.
+            </p>
+            <p>
+                This is the content for my first webapp. This is the content for my first webapp. This is the content for my first webapp.
+                This is the content for my first webapp. This is the content for my first webapp. This is the content for my first webapp.
+                This is the content for my first webapp.
+            </p>  `
+    }
 };
-
 function createTemplate (data) {
     var title = data.title;
     var date = data.date;
@@ -94,18 +137,12 @@ app.get('/submit-name', function(req, res) {
 });
 
 
-app.get('/article-one',function (req, res){
-   res.send(createTemplate(articleOne));   
+app.get('/:articleName',function (req, res) {
+    var articleName = req.params.articleName; 
+   res.send(createTemplate(articles[articleName]));   
 });
 
-app.get('/article-two',function (req, res){
-   res.sendFile(path.join(__dirname, 'ui', 'article-two.html'));       
-});
-
-app.get('/article-three',function (req, res){
-   res.sendFile(path.join(__dirname, 'ui', 'article-three.html'));      
-});
-
+ 
 app.get('/ui/style.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));
 });
