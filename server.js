@@ -15,7 +15,7 @@ var config = {
 var app = express();
 app.use(morgan('combined'));
 
-var articles = {
+/*var articles = {
     'article-one': {
         title: 'Article-one | abhishek cec',
         heading: 'article one',
@@ -80,7 +80,7 @@ var articles = {
                 This is the content for my first webapp.
             </p>  `
     }
-};
+};*/
 function createTemplate (data) {
     var title = data.title;
     var date = data.date;
